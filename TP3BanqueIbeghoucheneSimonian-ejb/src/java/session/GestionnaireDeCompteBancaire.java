@@ -26,7 +26,7 @@ public class GestionnaireDeCompteBancaire {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    public void creerComptes(CompteBancaire cb) {
+    public void creerCompte(CompteBancaire cb) {
            em.persist(cb);
     }
     //public List<CompteBancaire> getAllComptes() {
@@ -40,5 +40,10 @@ public class GestionnaireDeCompteBancaire {
         Query query = em.createNamedQuery("CompteBancaire.findAll");  
         return query.getResultList();
     }
-    
+    public void creerComptesTest() {  
+        creerCompte(new CompteBancaire("John Lennon", 150000));  
+        creerCompte(new CompteBancaire("Paul McCartney", 950000));  
+        creerCompte(new CompteBancaire("Ringo Starr", 20000));  
+        creerCompte(new CompteBancaire("Georges Harrisson", 100000));  
+}     
 }
