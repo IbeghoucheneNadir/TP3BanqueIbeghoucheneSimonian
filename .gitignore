@@ -1,0 +1,49 @@
+nbproject/private/
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/private/
+TP3BanqueIbeghoucheneSimonian-war/nbproject/private/
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/build-impl.xml
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/genfiles.properties
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/private/private.properties
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/project.properties
+TP3BanqueIbeghoucheneSimonian-war/nbproject/private/private.properties
+TP3BanqueIbeghoucheneSimonian-war/nbproject/project.properties
+nbproject/private/private.properties
+nbproject/project.properties
+TP3BanqueIbeghoucheneSimonian-war/build/
+TP3BanqueIbeghoucheneSimonian-ejb/dist/
+TP3BanqueIbeghoucheneSimonian-ejb/build/
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+*.sar
+*.class
+TP3BanqueIbeghoucheneSimonian-war/dist/
+build/
+dist/
