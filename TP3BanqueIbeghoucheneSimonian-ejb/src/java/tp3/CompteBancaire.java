@@ -23,7 +23,19 @@ public class CompteBancaire implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private final String nom;
+
+    public String getNom() {
+        return nom;
+    }
     private int solde;
+
+    public int getSolde() {
+        return solde;
+    }
+
+    public void setSolde(int solde) {
+        this.solde = solde;
+    }
 
     public CompteBancaire(String nom, int solde) {  
         this.nom = nom;  

@@ -1,9 +1,17 @@
-/nbproject/private/
-/TP3BanqueIbeghoucheneSimonian-ejb/nbproject/private/
-/TP3BanqueIbeghoucheneSimonian-war/nbproject/private/
-/TP3BanqueIbeghoucheneSimonian-war/build/
-/TP3BanqueIbeghoucheneSimonian-ejb/dist/
-/TP3BanqueIbeghoucheneSimonian-ejb/build/
+nbproject/private/
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/private/
+TP3BanqueIbeghoucheneSimonian-war/nbproject/private/
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/build-impl.xml
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/genfiles.properties
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/private/private.properties
+TP3BanqueIbeghoucheneSimonian-ejb/nbproject/project.properties
+TP3BanqueIbeghoucheneSimonian-war/nbproject/private/private.properties
+TP3BanqueIbeghoucheneSimonian-war/nbproject/project.properties
+nbproject/private/private.properties
+nbproject/project.properties
+TP3BanqueIbeghoucheneSimonian-war/build/
+TP3BanqueIbeghoucheneSimonian-ejb/dist/
+TP3BanqueIbeghoucheneSimonian-ejb/build/
 
 # Log file
 *.log
@@ -36,6 +44,6 @@
 *.ear
 *.sar
 *.class
-/TP3BanqueIbeghoucheneSimonian-war/dist/
-/build/
-/dist/
+TP3BanqueIbeghoucheneSimonian-war/dist/
+build/
+dist/

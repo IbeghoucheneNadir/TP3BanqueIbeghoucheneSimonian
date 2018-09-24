@@ -8,6 +8,8 @@ package session;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import tp3.CompteBancaire;
 
 /**
@@ -18,13 +20,18 @@ import tp3.CompteBancaire;
 @LocalBean
 public class GestionnaireDeCompteBancaire {
 
+    @PersistenceContext(unitName = "TP3BanqueIbeghoucheneSimonian-ejbPU")
+    private EntityManager em;
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
-    public void creerComptes(CompteBancaire cb) {  
-    
-}
+    public void creerComptes(CompteBancaire cb) {
+           em.persist(cb);
+    }
     //public List<CompteBancaire> getAllComptes() {
-    
+
     //}
+    public void persist(Object object) {
+        em.persist(object);
+    }
 }
