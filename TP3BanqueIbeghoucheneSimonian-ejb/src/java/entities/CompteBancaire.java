@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp3;
+package entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -22,7 +22,10 @@ public class CompteBancaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private final String nom;
+    private String nom;
+
+    public CompteBancaire() {
+    }
 
     public String getNom() {
         return nom;

@@ -10,7 +10,8 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import tp3.CompteBancaire;
+import entities.CompteBancaire;
+import javax.persistence.Query;
 
 /**
  *
@@ -34,4 +35,10 @@ public class GestionnaireDeCompteBancaire {
     public void persist(Object object) {
         em.persist(object);
     }
+
+    public List<CompteBancaire> getAllComptes() {
+        Query query = em.createNamedQuery("CompteBancaire.findAll");  
+        return query.getResultList();
+    }
+    
 }
