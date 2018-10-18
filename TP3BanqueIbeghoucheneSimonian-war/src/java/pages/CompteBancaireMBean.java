@@ -7,24 +7,25 @@ package pages;
 
 import entities.CompteBancaire;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import session.Bootstrap;
 import session.CompteBancaireFacade;
 
-/**
- *
- * @author katzenmaul
- */
 @Named(value = "compteBancaireMBean")
 @ViewScoped
 public class CompteBancaireMBean implements Serializable {
 
     @EJB
+    private Bootstrap bootstrap;
+
+    @EJB
     private CompteBancaireFacade compteBancaireFacade;
     
-    private List<CompteBancaire> allCompteBancaire;
+    private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
 
     public CompteBancaireMBean() {
         
@@ -32,9 +33,20 @@ public class CompteBancaireMBean implements Serializable {
     
     public List<CompteBancaire> getAllCompteBancaire(){
         System.out.println("getAllCompteBancaire Called!");
-        List<CompteBancaire> cb = compteBancaireFacade.getAllCompteBancaire();
-        allCompteBancaire = cb;
+        if(this.allCompteBancaire.isEmpty()){
+            System.out.println("getAllCompteBancaire CACHED!");
+            List<CompteBancaire> cb = compteBancaireFacade.getAllCompteBancaire();
+            allCompteBancaire = cb;
+        }
         return allCompteBancaire;
     }
     
+    public void resetCache(){
+        this.allCompteBancaire = new ArrayList<>();
+    }
+    
+    public void creerComptesTest(){
+        bootstrap.init();
+        resetCache();
+    }
 }
