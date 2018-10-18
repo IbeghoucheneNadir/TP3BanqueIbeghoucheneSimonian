@@ -12,7 +12,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import session.CompteBancaireFacade;
-import session.CompteManager;
 
 /**
  *
@@ -26,13 +25,13 @@ public class CompteBancaireMBean implements Serializable {
     private CompteBancaireFacade compteBancaireFacade;
     
     private List<CompteBancaire> allCompteBancaire;
-    /**
-     * Creates a new instance of CompteBancaireMBean
-     */
+
     public CompteBancaireMBean() {
+        
     }
     
     public List<CompteBancaire> getAllCompteBancaire(){
+        System.out.println("getAllCompteBancaire Called!");
         List<CompteBancaire> cb = compteBancaireFacade.getAllCompteBancaire();
         allCompteBancaire = cb;
         return allCompteBancaire;

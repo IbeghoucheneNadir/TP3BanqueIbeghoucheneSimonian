@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import entities.CompteBancaire;
@@ -13,10 +8,6 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author katzenmaul
- */
 @Startup
 @Singleton
 @LocalBean
@@ -31,14 +22,12 @@ public class Bootstrap {
     
     @PostConstruct
     public void init() {
-        System.out.println("orio "+em.getProperties());
-        em.persist(new CompteBancaire("John Lennon", 150000));
-        em.flush();
         creerComptesTest();
+        em.flush();
     }
     
     public void creerCompte(CompteBancaire cb) {
-        em.persist(cb);
+        persist(cb);
     }
     
     public void creerComptesTest() {  
@@ -47,7 +36,4 @@ public class Bootstrap {
        creerCompte(new CompteBancaire("Ringo Starr", 20000));  
        creerCompte(new CompteBancaire("Georges Harrisson", 100000));  
     }
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }
