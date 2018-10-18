@@ -85,7 +85,7 @@ public class CompteManager {
     
 
     public final List<CompteBancaire> getAllCompteBancaire(){
-
+        if(em == null){System.out.println("DAAAMMM");return null;}
         Query query = em.createNamedQuery("CompteBancaire.findAll");
 
         return query.getResultList();

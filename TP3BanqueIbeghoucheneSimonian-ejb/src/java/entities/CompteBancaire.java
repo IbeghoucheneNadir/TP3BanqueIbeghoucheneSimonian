@@ -13,8 +13,12 @@ package entities;
 
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import javax.persistence.Id;
 
@@ -23,6 +27,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 
@@ -37,12 +42,13 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "ComptesBanque", schema = "APP")
-
+@Table(name = "COMPTESBANQUE")
+@XmlRootElement
 @NamedQueries({
-
-    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM CompteBancaire c")})
-
+    @NamedQuery(name = "CompteBancaire.findAll", query = "SELECT c FROM CompteBancaire c"),
+    @NamedQuery(name = "CompteBancaire.findById", query = "SELECT c FROM CompteBancaire c WHERE c.id = :id"),
+    @NamedQuery(name = "CompteBancaire.findByNom", query = "SELECT c FROM CompteBancaire c WHERE c.nom = :nom"),
+    @NamedQuery(name = "CompteBancaire.findBySolde", query = "SELECT c FROM CompteBancaire c WHERE c.solde = :solde")})
 public class CompteBancaire implements Serializable {
 
 
@@ -50,11 +56,15 @@ public class CompteBancaire implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "ID")
     private Long id;
-
+    
+    @Column(name = "NOM")
     private String nom;
 
+    @Column(name = "SOLDE")
     private int solde;
 
     
