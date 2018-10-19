@@ -19,41 +19,59 @@ import session.CompteBancaireFacade;
 @ViewScoped
 public class CompteBancaireMBean implements Serializable {
 
+    private int id;
+    private double montant;
+
     @EJB
     private Bootstrap bootstrap;
 
     @EJB
     private CompteBancaireFacade compteBancaireFacade;
-    
+
     private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
-    
 
     public CompteBancaireMBean() {
-        
+
     }
-    
-    public List<CompteBancaire> getAllCompteBancaire(){
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(double montant) {
+        this.montant = montant;
+    }
+
+    public List<CompteBancaire> getAllCompteBancaire() {
         System.out.println("getAllCompteBancaire Called!");
-        if(this.allCompteBancaire.isEmpty()){
+        if (this.allCompteBancaire.isEmpty()) {
             System.out.println("getAllCompteBancaire CACHED!");
             List<CompteBancaire> cb = compteBancaireFacade.getAllCompteBancaire();
             allCompteBancaire = cb;
         }
         return allCompteBancaire;
     }
-    
-    public void resetCache(){
+
+    public void resetCache() {
         this.allCompteBancaire = new ArrayList<>();
     }
-    
-    public void creerComptesTest(){
+
+    public void creerComptesTest() {
         bootstrap.init();
         resetCache();
     }
-    
-     public String showDetails(int compteBancaireId) {  
-         System.out.println("YESS");
-        return "CompteBancaireDetails?IdcompteBancaire=" +compteBancaireId;
-     }
-     
+
+    public String showDetails(int compteBancaireId) {
+        System.out.println("YESS");
+        return "CompteBancaireDetails?IdcompteBancaire=" + compteBancaireId;
+    }
+
 }

@@ -9,7 +9,7 @@
         <f:event type="preRenderView"
                  listener="#{compteBancaireMBean.resetCache}"/>
     </f:metadata>
-    
+
     <h:head>
         <title>Liste des Comptes Bancaires</title>
     </h:head>
@@ -20,34 +20,38 @@
                 Liste des Comptes Bancaires
             </ui:define>
 
-            <ui:define name="left">
-                <a href="/TP3BanqueIbeghoucheneSimonian-war/faces/index.xhtml">Home!</a><br/>
-                <input type="submit" value="Button" />
-                <input type="submit" value="Button" />
+            <ui:define name="left">        
+                <h:form>
+                    <h3>Déposer de l'argent</h3>
+                    Id: <h:inputText value=""></h:inputText>
+                    Montant : <h:inputText value=""></h:inputText>
+                    <h:commandButton action="{compteBancaireMBean.deposer()}" value="Déposer"/>
+
+                </h:form>
             </ui:define>
 
             <ui:define name="content">
                 <f:view>
                     <h:form>
                         <h1><h:outputText value="List des Comptes Bancaires:"/></h1>
-                        
-                            <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" var="item"   
-                                emptyMessage="No ccompte bancaire found with given criteria"   
-                                widgetVar="comptebancaireTable"  
-                                paginator="true"  
-                                rows="10">  
 
-                             <f:facet name="header">    
+                        <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" var="item"   
+                                     emptyMessage="No ccompte bancaire found with given criteria"   
+                                     widgetVar="comptebancaireTable"  
+                                     paginator="true"  
+                                     rows="10">  
+
+                            <f:facet name="header">    
                                 <p:outputPanel>    
                                     <h:outputText value="Search all fields:" />    
                                     <p:inputText id="globalFilter" onkeyup="comptebancaireTable.filter()" style="width:150px" />    
                                 </p:outputPanel>    
-                             </f:facet>
-                                <p:column sortBy="#{item.id}">
+                            </f:facet>
+                            <p:column sortBy="#{item.id}">
                                 <f:facet name="header">
                                     <h:outputText value="Id"/>
                                 </f:facet>
-                                    <h:outputText value="#{item.id}"/>
+                                <h:outputText value="#{item.id}"/>
                             </p:column>
 
                             <p:column sortBy="#{item.nom}">
@@ -56,14 +60,14 @@
                                 </f:facet>
                                 <h:outputText value="#{item.nom}"/>
                             </p:column>
-                                
+
                             <p:column sortBy="#{item.solde}">
                                 <f:facet name="header">
                                     <h:outputText value="Solde"/>
                                 </f:facet>
                                 <h:outputText value="#{item.solde}"/>
                             </p:column>
-                                
+
                         </p:dataTable>
                     </h:form>
                 </f:view>
