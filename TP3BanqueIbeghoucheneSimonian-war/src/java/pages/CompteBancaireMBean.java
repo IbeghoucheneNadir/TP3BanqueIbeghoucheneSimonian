@@ -51,12 +51,9 @@ public class CompteBancaireMBean implements Serializable {
         resetCache();
     }
     
-     public String showDetails(int commpteBancaireId) {  
-        return "CompteBancaireDetails?commpteBancaireIdr=" +commpteBancaireId;
-     }  
+     public String showDetails(int compteBancaireId) {  
+         System.out.println("YESS");
+        return "CompteBancaireDetails?IdcompteBancaire=" +compteBancaireId;
+     }
      
-        
-    public CompteBancaire getCompteBancaire(long id){
-        return compteBancaireFacade.getCompteBancaire(id);
-    }
 }
