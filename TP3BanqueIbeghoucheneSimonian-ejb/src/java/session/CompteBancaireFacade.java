@@ -50,4 +50,8 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         em.persist(cb);
     }
     
+    public CompteBancaire update(CompteBancaire cb){
+        return em.merge(cb);
+    }
+    
 }

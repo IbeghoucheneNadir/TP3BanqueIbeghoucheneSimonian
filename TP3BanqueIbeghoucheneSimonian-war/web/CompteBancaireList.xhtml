@@ -16,8 +16,12 @@
         <f:view>
             <h:form>
                 <h1><h:outputText value="List des Comptes Bancaires:"/></h1>
-                <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" 
-                             var="item">
+             
+                <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" var="item"   
+                        emptyMessage="No ccompte bancaire found with given criteria"   
+                        widgetVar="comptebancaireTable"  
+                        paginator="true"  
+                        rows="10">                 
                     <p:column sortBy="#{item.id}">
                         <f:facet name="header">
                             <h:outputText value="Id"/>
