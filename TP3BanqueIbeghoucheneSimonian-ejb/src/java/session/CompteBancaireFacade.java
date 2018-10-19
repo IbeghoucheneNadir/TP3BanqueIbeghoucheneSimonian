@@ -34,6 +34,15 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return query.getResultList();
     }
     
+    
+    public CompteBancaire getCompteBancaire(long id){
+        if(em == null){System.err.println("EntityManager is null");return null;}
+        Query query = em.createNamedQuery("CompteBancaire.findById");
+        query.setParameter("id",id);
+        return (CompteBancaire) query.getSingleResult();
+    }
+    
+             
     public final List<CompteBancaire> getRangeCompteBancaire(int start, int range){
         if(em == null){System.err.println("EntityManager is null");return null;}
         Query query = em.createNamedQuery("CompteBancaire.findAll");
@@ -53,5 +62,8 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     public CompteBancaire update(CompteBancaire cb){
         return em.merge(cb);
     }
-    
+    public  CompteBancaire getCompteBancaire(int idCompteBancaire) {  
+        return em.find(CompteBancaire.class, idCompteBancaire);  
+}  
+   
 }

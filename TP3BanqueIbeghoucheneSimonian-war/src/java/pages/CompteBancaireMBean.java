@@ -26,6 +26,7 @@ public class CompteBancaireMBean implements Serializable {
     private CompteBancaireFacade compteBancaireFacade;
     
     private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
+    
 
     public CompteBancaireMBean() {
         
@@ -48,5 +49,14 @@ public class CompteBancaireMBean implements Serializable {
     public void creerComptesTest(){
         bootstrap.init();
         resetCache();
+    }
+    
+     public String showDetails(int commpteBancaireId) {  
+        return "CompteBancaireDetails?commpteBancaireIdr=" +commpteBancaireId;
+     }  
+     
+        
+    public CompteBancaire getCompteBancaire(long id){
+        return compteBancaireFacade.getCompteBancaire(id);
     }
 }
