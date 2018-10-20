@@ -22,11 +22,15 @@
 
             <ui:define name="left">        
                 <h:form>
+
+                    <p:growl id="growl" showDetail="true" sticky="true" />  
+
                     <h3>Déposer de l'argent</h3>
                     Id: <h:inputText value="#{compteBancaireMBean.id}"></h:inputText>
                     Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
-                    <h:commandButton action="#{compteBancaireMBean.deposer()}" value="Déposer"/>
+                    <p:commandButton actionListener="#{compteBancaireMBean.deposer()}" value="Déposer"  update="growl"/>
                 </h:form>
+                <h:outputText value="#{compteBancaireMBean.message}"/>
             </ui:define>
 
             <ui:define name="content">

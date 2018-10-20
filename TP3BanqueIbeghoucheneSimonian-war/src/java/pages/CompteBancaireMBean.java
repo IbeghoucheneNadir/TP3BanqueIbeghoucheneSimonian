@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import session.Bootstrap;
@@ -24,6 +27,7 @@ public class CompteBancaireMBean implements Serializable {
     private int id;
     private double montant;
     private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
+    private String message;
 
     @EJB
     private Bootstrap bootstrap;
@@ -33,6 +37,14 @@ public class CompteBancaireMBean implements Serializable {
 
     public CompteBancaireMBean() {
 
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public int getId() {
@@ -60,7 +72,6 @@ public class CompteBancaireMBean implements Serializable {
         }
         return allCompteBancaire;
     }
-    
 
     public void resetCache() {
         this.allCompteBancaire = new ArrayList<>();
@@ -75,13 +86,21 @@ public class CompteBancaireMBean implements Serializable {
         System.out.println("YESS");
         return "CompteBancaireDetails?IdcompteBancaire=" + compteBancaireId;
     }
-    
-    public void deposer(){
-        compteBancaireFacade.deposer(id,montant);
-        resetCache();
+
+    public void deposer() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            compteBancaireFacade.deposer(id, montant);
+            resetCache();
+            message = "Transfere effectué";
+
+        } catch (EJBException e) {
+            message = "le compte bancaire " + id + " n'existe pas";
+        }
+        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
-    
-    public void delete(long id){
+
+    public void delete(long id) {
         compteBancaireFacade.delete(id);
     }
 
