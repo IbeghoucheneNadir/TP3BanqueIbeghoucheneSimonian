@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -43,7 +44,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return query.getResultList();
     }
 
-    public CompteBancaire getCompteBancaire(long id) {
+    public CompteBancaire getCompteBancaire(long id) throws NoResultException{
         if (updateEM()) {
             System.err.println("EntityManager is null");
             return null;
@@ -81,9 +82,9 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         if (updateEM()) {
             System.err.println("EntityManager is null");
         }
-        System.out.println("montant" +montant);
-        System.out.println("name ==="   +getCompteBancaire(id).getNom());
         CompteBancaire cb = getCompteBancaire(id);
+        System.out.println("montant" +montant);
+        System.out.println("name ==="   +cb.getNom());
         cb.deposer(montant);
         em.merge(cb);
         em.flush();

@@ -5,10 +5,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <f:metadata>
-        <f:event type="preRenderView"
-                 listener="#{compteBancaireMBean.resetCache}"/>
-    </f:metadata>
 
     <h:head>
         <title>Liste des Comptes Bancaires</title>
@@ -21,50 +17,44 @@
             </ui:define>
 
             <ui:define name="left">        
-                <h:form>
-
+                <h:form id="formA">
                     <p:growl id="growl" showDetail="true" sticky="true" />  
-
+                    
                     <h3>Déposer de l'argent</h3>
                     Id: <h:inputText value="#{compteBancaireMBean.id}"></h:inputText>
                     Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
-                    <p:commandButton actionListener="#{compteBancaireMBean.deposer()}" value="Déposer"  update="growl"/>
+                    <p:commandButton actionListener="#{compteBancaireMBean.deposer()}" value="Déposer"  update=":formA:growl :formB:theTable"/>
                 </h:form>
                 <h:outputText value="#{compteBancaireMBean.message}"/>
                  <h:form>
-
-                    <p:growl id="growl" showDetail="true" sticky="true" />  
 
                     <h3>Retirer de l'argent</h3>
                     Id: <h:inputText value="#{compteBancaireMBean.id}"></h:inputText>
                     Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
-                    <p:commandButton actionListener="#{compteBancaireMBean.retirer()}" value="Retirer"  update="growl"/>
+                    <p:commandButton actionListener="#{compteBancaireMBean.retirer()}" value="Retirer"  update=":formA:growl :formB:theTable"/>
                 </h:form>
                 <h:outputText value="#{compteBancaireMBean.message}"/>
                  <h:form>
-
-                    <p:growl id="growl" showDetail="true" sticky="true" />  
-
                     <h3>Transferer de l'argent</h3>
                     Id1: <h:inputText value="#{compteBancaireMBean.id1}"></h:inputText>
                     Id2: <h:inputText value="#{compteBancaireMBean.id2}"></h:inputText>
 
                     Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
-                    <p:commandButton actionListener="#{compteBancaireMBean.transferer()}" value="Transférer"  update="growl"/>
+                    <p:commandButton actionListener="#{compteBancaireMBean.transferer()}" value="Transférer"  update=":formA:growl :formB:theTable"/>
                 </h:form>
                 <h:outputText value="#{compteBancaireMBean.message}"/>
             </ui:define>
-
-            <ui:define name="content">
+            <ui:define name="content" >
                 <f:view>
-                    <h:form>
+                    <h:form id="formB">
                         <h1><h:outputText value="List des Comptes Bancaires:"/></h1>
 
                         <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" var="item"   
                                      emptyMessage="No ccompte bancaire found with given criteria"   
                                      widgetVar="comptebancaireTable"  
                                      paginator="true"  
-                                     rows="10">  
+                                     rows="10"
+                                     id="theTable">  
 
                             <f:facet name="header">    
                                 <p:outputPanel>    

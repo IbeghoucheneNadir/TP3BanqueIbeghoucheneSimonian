@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pages;
 
 import entities.CompteBancaire;
@@ -10,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -104,44 +98,41 @@ public class CompteBancaireMBean implements Serializable {
     }
 
     public void deposer() {
-        FacesContext context = FacesContext.getCurrentInstance();
         try {
             compteBancaireFacade.deposer(id, montant);
-            resetCache();
-            message = "Transfere effectué";
-
+            handleMessage(true,"Transfere effectué");
         } catch (Exception e) {
-            message = "le compte bancaire " + id + " n'existe pas";
+            handleMessage(false,"le compte bancaire " + id + " n'existe pas");
         }
-        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
     
      public void retirer() {
-        FacesContext context = FacesContext.getCurrentInstance();
         try {
             compteBancaireFacade.retirer(id, montant);
-            resetCache();
-            message = "Retrait effectué";
-
+            handleMessage(true,"Retrait effectué");
         } catch (Exception e) {
-            message = "le compte bancaire " + id + " n'existe pas";
+            handleMessage(false,"le compte bancaire " + id + " n'existe pas");
         }
-        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
       public void transferer() {
-        FacesContext context = FacesContext.getCurrentInstance();
         try {
             compteBancaireFacade.transferer(id1, id2, montant);
-            resetCache();
-            message = "Trnsfert effectué";
-
+            handleMessage(true,"Transfert effectué");
         } catch (Exception e) {
-            message = "Transfert non effectué";
+            handleMessage(false,"Transfert non effectué");
         }
-        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
-     
-
+      
+      private void handleMessage(boolean isSuccess, String leMessage){
+          resetCache();
+          FacesContext context = FacesContext.getCurrentInstance();
+          message = leMessage;
+          if(isSuccess){
+            context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
+            return;
+          }
+          context.addMessage(null, new FacesMessage("Unsuccessful", "Your message: " + message));
+      }
 
     public void delete(long id) {
         compteBancaireFacade.delete(id);
