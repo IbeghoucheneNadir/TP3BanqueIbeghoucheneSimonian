@@ -99,6 +99,20 @@ public class CompteBancaireMBean implements Serializable {
         }
         context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
+    
+     public void retirer() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            compteBancaireFacade.retirer(id, montant);
+            resetCache();
+            message = "Retrait effectué";
+
+        } catch (EJBException e) {
+            message = "le compte bancaire " + id + " n'existe pas";
+        }
+        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
+    }
+
 
     public void delete(long id) {
         compteBancaireFacade.delete(id);

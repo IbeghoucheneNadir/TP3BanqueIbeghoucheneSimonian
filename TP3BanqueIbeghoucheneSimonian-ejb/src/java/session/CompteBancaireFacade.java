@@ -89,7 +89,19 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         em.flush();
         System.out.println("Nouveau Solde = " + cb.getSolde());
     }
-
+    
+    public void retirer(int id, double montant) {
+        if (updateEM()) {
+            System.err.println("EntityManager is null");
+        }
+        System.out.println("montant" +montant);
+        System.out.println("name ==="   +getCompteBancaire(id).getNom());
+        CompteBancaire cb = getCompteBancaire(id);
+        cb.retirer(montant);
+        em.merge(cb);
+        em.flush();
+        System.out.println("Nouveau Solde = " + cb.getSolde());
+    }
     public void delete(long id) {
         if (updateEM()) {
             System.err.println("EntityManager is null");

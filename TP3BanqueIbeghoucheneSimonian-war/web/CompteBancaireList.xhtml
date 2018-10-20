@@ -31,6 +31,16 @@
                     <p:commandButton actionListener="#{compteBancaireMBean.deposer()}" value="Déposer"  update="growl"/>
                 </h:form>
                 <h:outputText value="#{compteBancaireMBean.message}"/>
+                 <h:form>
+
+                    <p:growl id="growl" showDetail="true" sticky="true" />  
+
+                    <h3>Retirer de l'argent</h3>
+                    Id: <h:inputText value="#{compteBancaireMBean.id}"></h:inputText>
+                    Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
+                    <p:commandButton actionListener="#{compteBancaireMBean.retirer()}" value="Retirer"  update="growl"/>
+                </h:form>
+                <h:outputText value="#{compteBancaireMBean.message}"/>
             </ui:define>
 
             <ui:define name="content">
