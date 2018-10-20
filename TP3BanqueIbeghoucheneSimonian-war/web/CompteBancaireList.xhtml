@@ -13,7 +13,7 @@
         <ui:composition template="./resources/defaultTemplate.xhtml">
 
             <ui:define name="top">
-                Liste des Comptes Bancaires
+                XXXXXXXXXXXXXXXXXXXXXX A VENIR
             </ui:define>
 
             <ui:define name="left">    
@@ -48,21 +48,14 @@
             <ui:define name="content" >
                 <f:view>
                     <h:form id="formB">
-                        <h1><h:outputText value="List des Comptes Bancaires:"/></h1>
-
+                        <h1><h:outputText value="Gestionnaire de Comptes Bancaires:"/></h1>
+                        <h2><h:outputText value="Liste des comptes:"/></h2>
                         <p:dataTable value="#{compteBancaireMBean.allCompteBancaire}" var="item"   
                                      emptyMessage="No ccompte bancaire found with given criteria"   
                                      widgetVar="comptebancaireTable"  
                                      paginator="true"  
                                      rows="10"
                                      id="theTable">  
-
-                            <f:facet name="header">    
-                                <p:outputPanel>    
-                                    <h:outputText value="Search all fields:" />    
-                                    <p:inputText id="globalFilter" onkeyup="comptebancaireTable.filter()" style="width:150px" />    
-                                </p:outputPanel>    
-                            </f:facet>
                             <p:column sortBy="#{item.id}">
                                 <f:facet name="header">
                                     <h:outputText value="Id"/>

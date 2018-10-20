@@ -35,5 +35,11 @@ public class Bootstrap {
        creerCompte(new CompteBancaire("Paul McCartney", 950000));  
        creerCompte(new CompteBancaire("Ringo Starr", 20000));  
        creerCompte(new CompteBancaire("Georges Harrisson", 100000));  
+       
+       // On crée en tout 60 comptes bancaires
+        for (int i = 0; i < 56; i++) {
+        creerCompte(new CompteBancaire("Compte bancaire "+i,(int)(Math.random()*100)));  
+        }
+        
     }
 }
