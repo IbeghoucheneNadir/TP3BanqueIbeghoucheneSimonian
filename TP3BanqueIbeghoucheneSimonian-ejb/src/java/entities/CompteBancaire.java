@@ -23,26 +23,26 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompteBancaire.findByNom", query = "SELECT c FROM CompteBancaire c WHERE c.nom = :nom"),
     @NamedQuery(name = "CompteBancaire.findBySolde", query = "SELECT c FROM CompteBancaire c WHERE c.solde = :solde")})
 public class CompteBancaire implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
-    
+
     @Column(name = "NOM")
     private String nom;
 
     @Column(name = "SOLDE")
-    private int solde;
-    
+    private double solde;
+
     @Column(name = "DATECREATION")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
 
-    public CompteBancaire(){
+    public CompteBancaire() {
     }
 
     public CompteBancaire(Long cbid) {
@@ -54,48 +54,48 @@ public class CompteBancaire implements Serializable {
         this.solde = solde;
         this.dateCreation = new Date();
     }
-    
+
     public CompteBancaire(String nom, int solde, Long id) {
-        this(nom,solde);
+        this(nom, solde);
         this.id = id;
     }
 
     public String getNom() {
         return nom;
     }
-    
+
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    public int getSolde() {
+
+    public double getSolde() {
         return solde;
     }
-    
+
     public void setSolde(int solde) {
         this.solde = solde;
     }
 
     public Long getId() {
-        return id;
+           return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-  public void deposer(int montant) {  
-    solde += montant;  
-  }  
+    public void deposer(double montant) {
+        solde += montant;
+    }
 
-  public int retirer(int montant) {  
-    if (montant < solde) {  
-      solde -= montant;  
-      return montant;  
-    } else {  
-      return 0;  
-    }  
-  }  
+    public int retirer(int montant) {
+        if (montant < solde) {
+            solde -= montant;
+            return montant;
+        } else {
+            return 0;
+        }
+    }
 
     @Override
     public int hashCode() {
@@ -112,7 +112,7 @@ public class CompteBancaire implements Serializable {
         CompteBancaire other = (CompteBancaire) object;
         return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
-    
+
     @Override
     public String toString() {
         return "entities.Compte[ id=" + id + " nom " + nom + " ]";

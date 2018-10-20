@@ -37,7 +37,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return query.getResultList();
     }
 
-    public CompteBancaire getCompteBancaire(long id) {
+    public CompteBancaire getCompteBancaire(int id) {
         if (em == null) {
             System.err.println("EntityManager is null");
             return null;
@@ -70,8 +70,12 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return em.merge(cb);
     }
 
-    public CompteBancaire getCompteBancaire(int idCompteBancaire) {
-        return em.find(CompteBancaire.class, idCompteBancaire);
+ 
+    public void deposer(int id, double montant) {
+                      System.out.println("montant" +montant);
 
+               System.out.println("name ==="   +getCompteBancaire(id).getNom());
+
+              // cb.deposer(montant);
     }
 }

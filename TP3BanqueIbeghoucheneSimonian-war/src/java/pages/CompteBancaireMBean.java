@@ -59,6 +59,7 @@ public class CompteBancaireMBean implements Serializable {
         }
         return allCompteBancaire;
     }
+    
 
     public void resetCache() {
         this.allCompteBancaire = new ArrayList<>();
@@ -72,6 +73,10 @@ public class CompteBancaireMBean implements Serializable {
     public String showDetails(int compteBancaireId) {
         System.out.println("YESS");
         return "CompteBancaireDetails?IdcompteBancaire=" + compteBancaireId;
+    }
+    public void deposer(){
+        compteBancaireFacade.deposer(id,montant);
+        resetCache();
     }
 
 }

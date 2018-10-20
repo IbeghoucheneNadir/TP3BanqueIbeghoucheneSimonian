@@ -23,10 +23,9 @@
             <ui:define name="left">        
                 <h:form>
                     <h3>Déposer de l'argent</h3>
-                    Id: <h:inputText value=""></h:inputText>
-                    Montant : <h:inputText value=""></h:inputText>
-                    <h:commandButton action="{compteBancaireMBean.deposer()}" value="Déposer"/>
-
+                    Id: <h:inputText value="#{compteBancaireMBean.id}"></h:inputText>
+                    Montant : <h:inputText value="#{compteBancaireMBean.montant}"></h:inputText>
+                    <h:commandButton action="#{compteBancaireMBean.deposer()}" value="Déposer"/>
                 </h:form>
             </ui:define>
 
