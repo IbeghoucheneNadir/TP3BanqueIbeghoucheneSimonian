@@ -13,14 +13,19 @@ import javax.persistence.Query;
 public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
 
     @PersistenceContext(unitName = "TP3BanqueIbeghoucheneSimonian-ejbPU")
-    private final EntityManager em;
+    private EntityManager em;
 
     public CompteBancaireFacade() {
         super(CompteBancaire.class);
+        updateEM();
+        System.out.println("Facade Cree!");
+    }
+    
+    private boolean updateEM(){
         EntityManagerFactory emf = Persistence.
                 createEntityManagerFactory("TP3BanqueIbeghoucheneSimonian-ejbPU");
         em = emf.createEntityManager();
-        System.out.println("Facade Cree!");
+        return em == null;     
     }
 
     @Override
@@ -29,7 +34,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     }
 
     public final List<CompteBancaire> getAllCompteBancaire() {
-        if (em == null) {
+        if (updateEM()) {
             System.err.println("EntityManager is null");
             return null;
         }
@@ -39,7 +44,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     }
 
     public CompteBancaire getCompteBancaire(int id) {
-        if (em == null) {
+        if (updateEM()) {
             System.err.println("EntityManager is null");
             return null;
         }
@@ -49,7 +54,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     }
 
     public final List<CompteBancaire> getRangeCompteBancaire(int start, int range) {
-        if (em == null) {
+        if (updateEM()) {
             System.err.println("EntityManager is null");
             return null;
         }
@@ -73,11 +78,14 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
 
  
     public void deposer(int id, double montant) {
+        if (updateEM()) {
+            System.err.println("EntityManager is null");
+        }
         System.out.println("montant" +montant);
         System.out.println("name ==="   +getCompteBancaire(id).getNom());
         CompteBancaire cb = getCompteBancaire(id);
         cb.deposer(montant);
-        persist(cb);
+        em.merge(cb);
         em.flush();
         System.out.println("Nouveau Solde = " + cb.getSolde());
     }
