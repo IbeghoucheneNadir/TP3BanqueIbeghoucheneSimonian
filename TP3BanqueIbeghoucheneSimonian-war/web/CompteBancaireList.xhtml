@@ -16,7 +16,8 @@
                 Liste des Comptes Bancaires
             </ui:define>
 
-            <ui:define name="left">        
+            <ui:define name="left">    
+                <h3><p:link href="/faces/index.xhtml" value="Home"/></h3>
                 <h:form id="formA">
                     <p:growl id="growl" showDetail="true" sticky="true" />  
                     
@@ -86,8 +87,9 @@
                                 <f:facet name="header">
                                     <h:outputText value="Action"/>
                                 </f:facet>
-                                <h:commandButton value="Delete" 
-                                                 action="#{compteBancaireMBean.delete(item.id)}"/>
+                                        <p:commandButton actionListener="#{compteBancaireMBean.delete(item.id)}" 
+                                                         value="Delete"  
+                                                         update=":formA:growl :formB:theTable"/>
                             </p:column>
 
                         </p:dataTable>

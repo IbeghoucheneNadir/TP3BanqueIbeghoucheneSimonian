@@ -135,7 +135,12 @@ public class CompteBancaireMBean implements Serializable {
       }
 
     public void delete(long id) {
-        compteBancaireFacade.delete(id);
+        System.out.println("deleting...");
+        if(compteBancaireFacade.delete(id)){
+            handleMessage(true,"le compte bancaire " + id + " est supprime");
+        }else{
+            handleMessage(true,"le compte bancaire " + id + "le compte bancaire " + id + " n'existe pas");
+        }
     }
 
 }

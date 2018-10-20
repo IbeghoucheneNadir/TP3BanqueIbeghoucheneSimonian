@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TransactionRequiredException;
 
 @Stateless
 public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
@@ -103,12 +104,25 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         em.flush();
         System.out.println("Nouveau Solde = " + cb.getSolde());
     }
-    public void delete(long id) {
+    public boolean delete(long id) {
         if (updateEM()) {
             System.err.println("EntityManager is null");
         }
-        CompteBancaire cb = getCompteBancaire(id);
-        em.remove(cb);
+        CompteBancaire cb;
+        try{
+            cb = getCompteBancaire(id);
+        }catch(NoResultException e){
+            System.out.println("id " + id + " not found");
+            return false;
+        }
+        
+        try{
+            em.remove(cb);
+        }catch(IllegalArgumentException | TransactionRequiredException e){
+            System.out.println("delte exception raised");
+            return false;
+        }
+        return true;
     }
 
     public void transferer(int id1, int id2, double montant) throws Exception {
