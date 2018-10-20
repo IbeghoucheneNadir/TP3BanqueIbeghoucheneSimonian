@@ -34,6 +34,7 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
             return null;
         }
         Query query = em.createNamedQuery("CompteBancaire.findAll");
+        System.out.println("getAllCompteBancaire (Facade) "+ query.getResultList());
         return query.getResultList();
     }
 
@@ -72,10 +73,12 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
 
  
     public void deposer(int id, double montant) {
-                      System.out.println("montant" +montant);
-
-               System.out.println("name ==="   +getCompteBancaire(id).getNom());
-
-              // cb.deposer(montant);
+        System.out.println("montant" +montant);
+        System.out.println("name ==="   +getCompteBancaire(id).getNom());
+        CompteBancaire cb = getCompteBancaire(id);
+        cb.deposer(montant);
+        persist(cb);
+        em.flush();
+        System.out.println("Nouveau Solde = " + cb.getSolde());
     }
 }

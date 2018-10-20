@@ -115,6 +115,6 @@ public class CompteBancaire implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Compte[ id=" + id + " nom " + nom + " ]";
+        return "entities.Compte[ id=" + id + " nom=" + nom + " solde=" + solde + " ]";
     }
 }

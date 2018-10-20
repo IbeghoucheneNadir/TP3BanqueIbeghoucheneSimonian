@@ -19,16 +19,17 @@ import session.CompteBancaireFacade;
 @ViewScoped
 public class CompteBancaireMBean implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private double montant;
+    private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
 
     @EJB
     private Bootstrap bootstrap;
 
     @EJB
     private CompteBancaireFacade compteBancaireFacade;
-
-    private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
 
     public CompteBancaireMBean() {
 
@@ -74,6 +75,7 @@ public class CompteBancaireMBean implements Serializable {
         System.out.println("YESS");
         return "CompteBancaireDetails?IdcompteBancaire=" + compteBancaireId;
     }
+    
     public void deposer(){
         compteBancaireFacade.deposer(id,montant);
         resetCache();
