@@ -27,7 +27,12 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         EntityManagerFactory emf = Persistence.
                 createEntityManagerFactory("TP3BanqueIbeghoucheneSimonian-ejbPU");
         em = emf.createEntityManager();
-        return em == null;     
+        if(em == null){
+            System.err.println("EntityManager is null");
+            return true;
+        }else{
+            return false;
+        }   
     }
 
     @Override
@@ -37,27 +42,30 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
 
     public final List<CompteBancaire> getAllCompteBancaire() {
         if (updateEM()) {
-            System.err.println("EntityManager is null");
             return null;
         }
         Query query = em.createNamedQuery("CompteBancaire.findAll");
-        System.out.println("getAllCompteBancaire (Facade) "+ query.getResultList());
         return query.getResultList();
     }
 
-    public CompteBancaire getCompteBancaire(long id) throws NoResultException{
+    public CompteBancaire getCompteBancaire(long id){
         if (updateEM()) {
-            System.err.println("EntityManager is null");
             return null;
         }
         Query query = em.createNamedQuery("CompteBancaire.findById");
         query.setParameter("id", id);
-        return (CompteBancaire) query.getSingleResult();
+        CompteBancaire cb;
+        try{
+            cb = (CompteBancaire) query.getSingleResult();
+            return cb;
+        }catch(NoResultException e){
+            System.out.println("compte bancaire " + id + " n'existe pas");
+            return null;
+        }
     }
 
     public final List<CompteBancaire> getRangeCompteBancaire(int start, int range) {
         if (updateEM()) {
-            System.err.println("EntityManager is null");
             return null;
         }
         Query query = em.createNamedQuery("CompteBancaire.findAll");
@@ -79,42 +87,35 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     }
 
  
-    public void deposer(int id, double montant) throws Exception{
-        if (updateEM()) {
-            System.err.println("EntityManager is null");
-        }
+    public boolean deposer(int id, double montant){
         CompteBancaire cb = getCompteBancaire(id);
+        if(cb == null) {return false;}
         System.out.println("montant" +montant);
         System.out.println("name ==="   +cb.getNom());
         cb.deposer(montant);
         em.merge(cb);
         em.flush();
         System.out.println("Nouveau Solde = " + cb.getSolde());
+        return true;
     }
     
-    public void retirer(int id, double montant) throws Exception {
-        if (updateEM()) {
-            System.err.println("EntityManager is null");
-        }
-        System.out.println("montant" +montant);
-        System.out.println("name ==="   +getCompteBancaire(id).getNom());
+    public boolean retirer(int id, double montant){
+        System.out.println("montant = " +montant);
+        System.out.println("name = "   +getCompteBancaire(id).getNom());
         CompteBancaire cb = getCompteBancaire(id);
-        cb.retirer(montant);
-        em.merge(cb);
-        em.flush();
-        System.out.println("Nouveau Solde = " + cb.getSolde());
-    }
-    public boolean delete(long id) {
-        if (updateEM()) {
-            System.err.println("EntityManager is null");
-        }
-        CompteBancaire cb;
-        try{
-            cb = getCompteBancaire(id);
-        }catch(NoResultException e){
-            System.out.println("id " + id + " not found");
+        if(cb == null){return false;}
+        if(cb.retirer(montant) != 0){
+            em.merge(cb);
+            em.flush();
+            System.out.println("Nouveau Solde = " + cb.getSolde());
+            return true;
+        }else{
             return false;
         }
+    }
+    public boolean delete(long id) {
+        CompteBancaire cb = getCompteBancaire(id);
+        if(cb == null){return false;}
         
         try{
             em.remove(cb);
@@ -125,9 +126,15 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return true;
     }
 
-    public void transferer(int id1, int id2, double montant) throws Exception {
-        retirer(id1,montant);
-        deposer(id2,montant);
+    public boolean transferer(int id1, int id2, double montant){
+        if(retirer(id1,montant)){
+            if(deposer(id2,montant)){
+                return true;
+            }
+            System.out.println("impossible de deposer au compte " + id2);
+        }
+        System.out.println("impossible de retirer au compte " + id1);
+        return false;
     }
     
 }

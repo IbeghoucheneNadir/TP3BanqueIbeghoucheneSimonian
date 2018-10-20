@@ -89,7 +89,7 @@ public class CompteBancaire implements Serializable {
     }
 
     public double retirer(double montant) {
-        if (montant < solde) {
+        if (montant <= solde) {
             solde -= montant;
             return montant;
         } else {
