@@ -24,7 +24,7 @@ public class CompteBancaireMBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private int id, id1, id2;
     private double montant;
     private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
     private String message;
@@ -53,6 +53,22 @@ public class CompteBancaireMBean implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId1() {
+        return id1;
+    }
+
+    public void setId1(int id1) {
+        this.id1 = id1;
+    }
+
+    public int getId2() {
+        return id2;
+    }
+
+    public void setId2(int id2) {
+        this.id2 = id2;
     }
 
     public double getMontant() {
@@ -112,6 +128,19 @@ public class CompteBancaireMBean implements Serializable {
         }
         context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
     }
+      public void transferer() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            compteBancaireFacade.transferer(id1, id2, montant);
+            resetCache();
+            message = "Trnsfert effectué";
+
+        } catch (EJBException e) {
+            message = "Transfert non effectué";
+        }
+        context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
+    }
+     
 
 
     public void delete(long id) {
