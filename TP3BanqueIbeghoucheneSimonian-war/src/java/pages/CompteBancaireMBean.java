@@ -110,7 +110,7 @@ public class CompteBancaireMBean implements Serializable {
             resetCache();
             message = "Transfere effectué";
 
-        } catch (EJBException e) {
+        } catch (Exception e) {
             message = "le compte bancaire " + id + " n'existe pas";
         }
         context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
@@ -123,7 +123,7 @@ public class CompteBancaireMBean implements Serializable {
             resetCache();
             message = "Retrait effectué";
 
-        } catch (EJBException e) {
+        } catch (Exception e) {
             message = "le compte bancaire " + id + " n'existe pas";
         }
         context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
@@ -135,7 +135,7 @@ public class CompteBancaireMBean implements Serializable {
             resetCache();
             message = "Trnsfert effectué";
 
-        } catch (EJBException e) {
+        } catch (Exception e) {
             message = "Transfert non effectué";
         }
         context.addMessage(null, new FacesMessage("Successful", "Your message: " + message));
