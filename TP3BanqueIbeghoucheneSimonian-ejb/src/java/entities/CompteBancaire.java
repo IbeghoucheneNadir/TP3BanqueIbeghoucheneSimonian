@@ -1,7 +1,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,15 +44,24 @@ public class CompteBancaire implements Serializable {
     @Column(name = "DATECREATION")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
+    
+    
+    @Column(name = "LISTEOPERATION")
+    @OneToMany
+    private List<OperationBancaire> listOperationBancaire;
+
 
     public CompteBancaire() {
+        this.listOperationBancaire = new ArrayList<OperationBancaire>();
     }
 
     public CompteBancaire(Long cbid) {
+        this.listOperationBancaire = new ArrayList<OperationBancaire>();
         this.id = cbid;
     }
 
     public CompteBancaire(String nom, int solde) {
+        this.listOperationBancaire = new ArrayList<OperationBancaire>();
         this.nom = nom;
         this.solde = solde;
         this.dateCreation = new Date();
@@ -57,9 +69,12 @@ public class CompteBancaire implements Serializable {
 
     public CompteBancaire(String nom, int solde, Long id) {
         this(nom, solde);
+        this.listOperationBancaire = new ArrayList<OperationBancaire>();
         this.id = id;
     }
-
+    public void addOperation(OperationBancaire op){
+        listOperationBancaire.add(op);
+    }
     public String getNom() {
         return nom;
     }
