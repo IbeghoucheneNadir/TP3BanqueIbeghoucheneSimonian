@@ -80,5 +80,9 @@ public class CompteBancaireMBean implements Serializable {
         compteBancaireFacade.deposer(id,montant);
         resetCache();
     }
+    
+    public void delete(long id){
+        compteBancaireFacade.delete(id);
+    }
 
 }
