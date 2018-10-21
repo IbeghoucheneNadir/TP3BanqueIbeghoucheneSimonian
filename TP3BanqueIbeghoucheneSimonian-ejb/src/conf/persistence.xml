@@ -3,6 +3,7 @@
   <persistence-unit name="TP3BanqueIbeghoucheneSimonian-ejbPU" transaction-type="JTA">
     <jta-data-source>jdbc/sample</jta-data-source>
     <class>entities.CompteBancaire</class>
+    <class>entities.OperationBancaire</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

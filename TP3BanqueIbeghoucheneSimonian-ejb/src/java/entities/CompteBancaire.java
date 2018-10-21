@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,23 +47,24 @@ public class CompteBancaire implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
     
-    
-    @Column(name = "LISTEOPERATION")
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OperationBancaire> listOperationBancaire;
 
+    public List<OperationBancaire> getListOperationBancaire() {
+        return listOperationBancaire;
+    }
 
     public CompteBancaire() {
-        this.listOperationBancaire = new ArrayList<OperationBancaire>();
+        this.listOperationBancaire = new ArrayList<>();
     }
 
     public CompteBancaire(Long cbid) {
-        this.listOperationBancaire = new ArrayList<OperationBancaire>();
+        this.listOperationBancaire = new ArrayList<>();
         this.id = cbid;
     }
 
     public CompteBancaire(String nom, int solde) {
-        this.listOperationBancaire = new ArrayList<OperationBancaire>();
+        this.listOperationBancaire = new ArrayList<>();
         this.nom = nom;
         this.solde = solde;
         this.dateCreation = new Date();
@@ -69,7 +72,7 @@ public class CompteBancaire implements Serializable {
 
     public CompteBancaire(String nom, int solde, Long id) {
         this(nom, solde);
-        this.listOperationBancaire = new ArrayList<OperationBancaire>();
+        this.listOperationBancaire = new ArrayList<>();
         this.id = id;
     }
     public void addOperation(OperationBancaire op){

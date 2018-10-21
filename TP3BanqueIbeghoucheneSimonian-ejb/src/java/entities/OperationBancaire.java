@@ -1,41 +1,42 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author mbdse
- */
 @Entity
+@XmlRootElement
 public class OperationBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
+    @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "MONTANT")
     private double montant;
+    @Column(name = "DATECREATION")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateOperation;
 
     public void OperationBancaire(String description){
         this.description=description;
         dateOperation= new Date();
     }
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -66,7 +67,7 @@ public class OperationBancaire implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += id;
         return hash;
     }
 
@@ -77,10 +78,7 @@ public class OperationBancaire implements Serializable {
             return false;
         }
         OperationBancaire other = (OperationBancaire) object;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
