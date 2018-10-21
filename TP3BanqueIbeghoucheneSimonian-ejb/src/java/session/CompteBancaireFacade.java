@@ -136,5 +136,18 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         System.out.println("impossible de retirer au compte " + id1);
         return false;
     }
+
+    public boolean creerNouveauCompte(String nom, double montant) {
+        if(!nom.isEmpty() && montant >= 0){
+            CompteBancaire cb = new CompteBancaire( nom, montant);
+            try{
+                em.persist(cb);
+                return true;
+            }catch(Exception e){
+                System.out.println("CompteBancaire existe deja");
+            }
+        }
+        return false;
+    }
     
 }

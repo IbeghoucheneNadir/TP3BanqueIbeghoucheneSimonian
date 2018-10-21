@@ -63,7 +63,7 @@ public class CompteBancaire implements Serializable {
         this.id = cbid;
     }
 
-    public CompteBancaire(String nom, int solde) {
+    public CompteBancaire(String nom, double solde) {
         this.listOperationBancaire = new ArrayList<>();
         this.nom = nom;
         this.solde = solde;

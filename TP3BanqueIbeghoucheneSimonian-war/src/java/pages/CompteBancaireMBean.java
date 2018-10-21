@@ -20,6 +20,15 @@ public class CompteBancaireMBean implements Serializable {
 
     private int id, id1, id2;
     private double montant;
+    private String nom;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
     private List<CompteBancaire> allCompteBancaire = new ArrayList<>();
     private String message;
 
@@ -138,6 +147,15 @@ public class CompteBancaireMBean implements Serializable {
             handleMessage(true,"le compte bancaire " + id + " est supprime");
         }else{
             handleMessage(true,"le compte bancaire " + id + "le compte bancaire " + id + " n'existe pas");
+        }
+    }
+    
+    public void creerCompte(){
+        System.out.println("Creation nouveau compte");
+        if(compteBancaireFacade.creerNouveauCompte(nom,montant)){
+            handleMessage(true,"le compte bancaire pour " + nom + " est cree");
+        }else{
+            handleMessage(false,"le compte bancaire pour " + nom + " n'est pas cree");
         }
     }
 
