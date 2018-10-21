@@ -38,7 +38,7 @@ public class Bootstrap {
        
        // On crée en tout 60 comptes bancaires
         for (int i = 0; i < 56; i++) {
-        creerCompte(new CompteBancaire("Compte bancaire "+i,(int)(Math.random()*100)));  
+        creerCompte(new CompteBancaire("Compte bancaire "+i,(int)(Math.random()*10000)));  
         }
         
     }

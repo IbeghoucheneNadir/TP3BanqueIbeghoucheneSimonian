@@ -68,6 +68,7 @@ public class CompteBancaire implements Serializable {
         this.nom = nom;
         this.solde = solde;
         this.dateCreation = new Date();
+        addOperation(new OperationBancaire("création de compte"));
     }
 
     public CompteBancaire(String nom, int solde, Long id) {
@@ -104,11 +105,13 @@ public class CompteBancaire implements Serializable {
 
     public void deposer(double montant) {
         solde += montant;
+        addOperation(new OperationBancaire("Dépot de "+montant));
     }
 
     public double retirer(double montant) {
         if (montant <= solde) {
-            solde -= montant;
+            addOperation(new OperationBancaire("Retrait de "+montant));
+            solde -= montant;  
             return montant;
         } else {
             return 0;
