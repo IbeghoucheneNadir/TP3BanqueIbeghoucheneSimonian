@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -49,6 +50,9 @@ public class CompteBancaire implements Serializable {
     
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OperationBancaire> listOperationBancaire;
+    
+    @ManyToMany(mappedBy = "comptesBancaires")
+    private List<Client> clients;
 
     public List<OperationBancaire> getListOperationBancaire() {
         return listOperationBancaire;
@@ -56,15 +60,18 @@ public class CompteBancaire implements Serializable {
 
     public CompteBancaire() {
         this.listOperationBancaire = new ArrayList<>();
+        this.clients = new ArrayList<>();
     }
 
     public CompteBancaire(Long cbid) {
         this.listOperationBancaire = new ArrayList<>();
+        this.clients = new ArrayList<>();
         this.id = cbid;
     }
 
     public CompteBancaire(String nom, double solde) {
         this.listOperationBancaire = new ArrayList<>();
+        this.clients = new ArrayList<>();
         this.nom = nom;
         this.solde = solde;
         this.dateCreation = new Date();
@@ -116,6 +123,18 @@ public class CompteBancaire implements Serializable {
         } else {
             return 0;
         }
+    }
+    
+    public List<Client> getClients() {
+        return clients;
+    }
+    
+    public boolean addClient(Client c){
+        return clients.add(c);
+    }
+    
+    public boolean deleteClient(Client c){
+        return clients.remove(c);
     }
 
     @Override
