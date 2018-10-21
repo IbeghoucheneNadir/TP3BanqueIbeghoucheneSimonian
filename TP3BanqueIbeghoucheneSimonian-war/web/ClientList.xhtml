@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Liste des Comptes Bancaires</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./resources/defaultTemplate.xhtml">
+
+            <ui:define name="top">
+                XXXXXXXXXXXXXXXXXXXXXX A VENIR
+            </ui:define>
+
+            <ui:define name="left">    
+                <h3><p:link href="/faces/index.xhtml" value="Home"/></h3>
+                <a href="/TP3BanqueIbeghoucheneSimonian-war/faces/CompteBancaireList.xhtml">
+                    Liste des comptes
+                </a><br/><br/>
+                
+            </ui:define>
+            <ui:define name="content" >
+                <f:view>
+                    <h:form id="formB">
+                        <p:growl id="growl" showDetail="true" sticky="true" /> 
+                        <h1><h:outputText value="Gestionnaire des Clients:"/></h1>
+                        <h2><h:outputText value="Liste des clients:"/></h2>
+                        <p:dataTable value="#{clientMBean.allClient}" var="item"   
+                                     emptyMessage="No client found with given criteria"   
+                                     widgetVar="clientTable"  
+                                     paginator="true"  
+                                     rows="10"
+                                     id="theTable">  
+                            <p:column sortBy="#{item.id}">
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+
+                            <p:column sortBy="#{item.nom}">
+                                <f:facet name="header">
+                                    <h:outputText value="Nom"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nom}"/>
+                            </p:column>
+
+                            <p:column sortBy="#{item.prenom}">
+                                <f:facet name="header">
+                                    <h:outputText value="Prenom"/>
+                                </f:facet>
+                                <h:outputText value="#{item.prenom}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.adresse}">
+                                <f:facet name="header">
+                                    <h:outputText value="Adresse"/>
+                                </f:facet>
+                                <h:outputText value="#{item.adresse}"/>
+                            </p:column>
+                            <p:column sortBy="#{item.telephone}">
+                                <f:facet name="header">
+                                    <h:outputText value="Telephone"/>
+                                </f:facet>
+                                <h:outputText value="#{item.telephone}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Action"/>
+                                </f:facet>
+                                        <p:commandButton actionListener="#{clientMBean.delete(item.id)}" 
+                                                         value="Delete"  
+                                                         update=":formB:theTable :formB:growl"/>
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+                <h:outputScript library="js" name="nouveauCompte.js"/>
+            </ui:define>
+        </ui:composition>        
+    </h:body>
+</html>
+
