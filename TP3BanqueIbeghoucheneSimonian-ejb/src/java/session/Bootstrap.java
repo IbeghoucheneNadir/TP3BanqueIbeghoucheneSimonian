@@ -2,6 +2,7 @@ package session;
 
 import entities.Client;
 import entities.CompteBancaire;
+import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.LocalBean;
@@ -52,6 +53,7 @@ public class Bootstrap {
     }
     
     public void creerClientsTest(){
+        ArrayList<Client> desClients = new ArrayList<>();
         for(int i = 1 ; i< 11 ; i++){
             Client cli = new Client();
             cli.setAdresse("adresse" + i);
@@ -77,13 +79,16 @@ public class Bootstrap {
           cli.deleteCompteBancaire(cb);
           System.out.println(cli);
           em.persist(cli);
+          desClients.add(cli);
         } 
-        
-        for(int i = 1; i<12; i++){
-            //CompteBancaire cb = em.find(CompteBancaire.class, i);
-            //cb.addClient(em.find(Client.class))
-          
-        }
-        
+        ArrayList<CompteBancaire> cblist = new ArrayList<>();
+        desClients.forEach((cli) -> {
+            CompteBancaire cb = new CompteBancaire("compte de " + cli.getNom(), (int)(Math.random()*10000));
+            cb.addClient(cli);
+            cblist.add(cb);
+            em.persist(cb);
+        });
+        CompteBancaire cb3 = cblist.get(0);
+        cb3.deleteClient(cb3.getClients().get(0));
     }
 }
