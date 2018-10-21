@@ -28,7 +28,7 @@ public class OperationBancaire implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateOperation;
 
-      public OperationBancaire(){
+    public OperationBancaire(){
     }
       
     public OperationBancaire(String description){

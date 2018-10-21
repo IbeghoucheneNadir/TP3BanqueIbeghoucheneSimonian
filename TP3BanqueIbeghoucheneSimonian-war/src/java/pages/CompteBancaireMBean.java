@@ -158,5 +158,8 @@ public class CompteBancaireMBean implements Serializable {
             handleMessage(false,"le compte bancaire pour " + nom + " n'est pas cree");
         }
     }
+    public String showOperation(int id){
+        return "ListeOperation?id="+id+"&amp;faces-redirect=true";
+    }
 
 }

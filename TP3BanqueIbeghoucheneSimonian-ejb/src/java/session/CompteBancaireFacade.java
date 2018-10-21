@@ -1,6 +1,7 @@
 package session;
 
 import entities.CompteBancaire;
+import entities.OperationBancaire;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -150,4 +151,8 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
         return false;
     }
     
+    public List<OperationBancaire> getOperations(int id) {
+        CompteBancaire c=getCompteBancaire(id);
+        return c.getListOperationBancaire();
+    }
 }

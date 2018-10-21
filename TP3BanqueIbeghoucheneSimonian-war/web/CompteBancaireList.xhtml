@@ -95,6 +95,9 @@
                                         <p:commandButton actionListener="#{compteBancaireMBean.delete(item.id)}" 
                                                          value="Delete"  
                                                          update=":formA:growl :formB:theTable"/>
+                                        <p:commandButton actionListener="#{compteBancaireMBean.showOperation(item.id)}" 
+                                                         value="Détails operations"  
+                                                         update=":formA:growl :formB:theTable"/>
                             </p:column>
 
                         </p:dataTable>
