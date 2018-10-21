@@ -68,6 +68,7 @@ public class CompteBancaire implements Serializable {
         this.nom = nom;
         this.solde = solde;
         this.dateCreation = new Date();
+        addOperation(new OperationBancaire("création de compte"));
     }
 
     public CompteBancaire(String nom, int solde, Long id) {
