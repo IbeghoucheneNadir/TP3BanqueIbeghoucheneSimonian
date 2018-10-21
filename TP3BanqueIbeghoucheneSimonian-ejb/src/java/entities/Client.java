@@ -19,7 +19,7 @@ public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Long id;
@@ -32,8 +32,8 @@ public class Client implements Serializable {
         CascadeType.MERGE
     })
     @JoinTable(name = "CLIENT_COMPTE",
-        joinColumns = @JoinColumn(name = "id"),
-        inverseJoinColumns = @JoinColumn(name = "id")
+        joinColumns = @JoinColumn(name = "idClient"),
+        inverseJoinColumns = @JoinColumn(name = "idCompte")
     )
     private List<CompteBancaire> comptesBancaires;
             

@@ -18,7 +18,7 @@ public class OperationBancaire implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "DESCRIPTION")
     private String description;

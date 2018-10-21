@@ -52,7 +52,7 @@ public class Bootstrap {
     }
     
     public void creerClientsTest(){
-        for(int i = 1 ; i< 2 ; i += 2){
+        for(int i = 1 ; i< 11 ; i++){
             Client cli = new Client();
             cli.setAdresse("adresse" + i);
             cli.setNom("client " + i);
@@ -63,9 +63,9 @@ public class Bootstrap {
             try{
                 query.setParameter("id", i);
                 cb = (CompteBancaire) query.getSingleResult();
-                query.setParameter("id", i+2);
+                query.setParameter("id", i+1);
                 cb1 = (CompteBancaire) query.getSingleResult();
-                query.setParameter("id", i+4);
+                query.setParameter("id", i+2);
                 cb2 = (CompteBancaire) query.getSingleResult();
             }catch(NoResultException e){
                 System.out.println("compte bancaire " + i + " n'existe pas");
