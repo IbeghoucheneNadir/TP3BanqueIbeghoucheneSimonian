@@ -114,23 +114,22 @@ public class CompteBancaireMBean implements Serializable {
     }
 
     public void deposer() {
-        try {
-            compteBancaireFacade.deposer(id, montant);
+        if(montant>0 && compteBancaireFacade.deposer(id, montant)){
             handleMessage(true,"Transfere effectué");
-        } catch (Exception e) {
-            handleMessage(false,"le compte bancaire " + id + " n'existe pas");
+        }else{
+            handleMessage(false,"le compte bancaire " + id + " n'existe pas ou le montant est negatif");
         }
     }
     
      public void retirer() {
-        if(compteBancaireFacade.retirer(id, montant)){
+        if(montant>0 && compteBancaireFacade.retirer(id, montant)){
             handleMessage(true,"Retrait effectué");
         }else{
             handleMessage(false,"Retrait n'est pas effectué, verifier id" + id + " ou montant");
         }
     }
       public void transferer() {
-        if(compteBancaireFacade.transferer(id1, id2, montant)){   
+        if(montant>0 && compteBancaireFacade.transferer(id1, id2, montant)){   
             handleMessage(true,"Transfert effectué");
         }else{
             handleMessage(false,"Transfert non effectué");
