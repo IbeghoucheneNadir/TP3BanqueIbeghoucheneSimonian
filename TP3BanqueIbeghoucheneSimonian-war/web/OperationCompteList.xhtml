@@ -3,18 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:metadata>
-        <f:viewParam name="id" value="operationBancaireMBean.id"/> 
+     <f:metadata>
+        <f:viewParam name="id" value="operationBancaireMBean.id" required="true"/> 
     </f:metadata>
     <h:head>
-        <title>Liste des opérations</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h1>Liste opérations compte N°</h1>
         <f:view>
             <h:form>
                 <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{operationBancaireMBean.operation}" var="item">
+                <h:dataTable value="#{operationCompteMBean.getOperation(param['id'])}" var="item" >
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Id"/>

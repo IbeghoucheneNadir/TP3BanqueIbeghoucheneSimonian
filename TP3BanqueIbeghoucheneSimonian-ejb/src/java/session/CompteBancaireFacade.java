@@ -152,7 +152,9 @@ public class CompteBancaireFacade extends AbstractFacade<CompteBancaire> {
     }
     
     public List<OperationBancaire> getOperations(int id) {
-        CompteBancaire c=getCompteBancaire(id);
-        return c.getListOperationBancaire();
+         if (updateEM()) {
+            return null;
+        }
+        return getCompteBancaire(id).getListOperationBancaire();
     }
 }

@@ -7,10 +7,10 @@ package pages;
 
 import entities.OperationBancaire;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.view.ViewScoped;
 import session.CompteBancaireFacade;
 
@@ -24,11 +24,17 @@ public class OperationCompteMBean implements Serializable{
     
     @EJB
     private CompteBancaireFacade gc;
-    private int id;
-    public List<OperationBancaire> getOperation(){
-        return gc.getOperations(id);
-    }
+    private int id;    
+    private List<OperationBancaire> allOperation = new ArrayList<>();
 
+    public List<OperationBancaire> getOperation(int a){
+     if (this.allOperation.isEmpty()) {
+            System.out.println("getAllCompteBancaire CACHED!");
+            List<OperationBancaire> cb = gc.getOperations(a);
+            allOperation = cb;
+        }
+        return allOperation;
+    }
     public int getId() {
         return id;
     }

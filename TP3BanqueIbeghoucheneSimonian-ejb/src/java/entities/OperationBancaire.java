@@ -8,17 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name = "OPERATIONCOMPTE")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "OperationBancaire.findById", query = "SELECT c FROM OperationBancaire c WHERE c.id = :id")})
 public class OperationBancaire implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "DESCRIPTION")
     private String description;

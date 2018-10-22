@@ -159,7 +159,7 @@ public class CompteBancaireMBean implements Serializable {
         }
     }
     public String showOperation(int id){
-        return "ListeOperation?id="+id+"&amp;faces-redirect=true";
+        return "OperationCompteList?id="+id+"&amp;faces-redirect=true";
     }
 
 }
