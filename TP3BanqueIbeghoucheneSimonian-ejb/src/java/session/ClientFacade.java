@@ -6,18 +6,17 @@
 package session;
 
 import entities.Client;
+import entities.CompteBancaire;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TransactionRequiredException;
 
-/**
- *
- * @author katzenmaul
- */
 @Stateless
 public class ClientFacade extends AbstractFacade<Client> {
 
@@ -53,6 +52,35 @@ public class ClientFacade extends AbstractFacade<Client> {
         }
         Query query = em.createNamedQuery("Client.findAll");
         return query.getResultList();
+    }
+    
+    public Client getClient(long id){
+        if (updateEM()) {
+            return null;
+        }
+        Query query = em.createNamedQuery("Client.findById");
+        query.setParameter("id", id);
+        Client c;
+        try{
+            c = (Client) query.getSingleResult();
+            return c;
+        }catch(NoResultException e){
+            System.out.println("client " + id + " n'existe pas");
+            return null;
+        }
+    }
+    
+    public boolean delete(long id) {
+        Client c = getClient(id);
+        if(c == null){return false;}
+        
+        try{
+            em.remove(c);
+        }catch(IllegalArgumentException | TransactionRequiredException e){
+            System.out.println("client delte exception raised");
+            return false;
+        }
+        return true;
     }
     
 }

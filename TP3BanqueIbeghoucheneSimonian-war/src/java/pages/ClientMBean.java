@@ -47,11 +47,11 @@ public class ClientMBean implements Serializable {
     
     public void delete(long id) {
         System.out.println("deleting...");
-//        if(clientFacade.delete(id)){
-//            handleMessage(true,"le compte bancaire " + id + " est supprime");
-//        }else{
-//            handleMessage(true,"le compte bancaire " + id + "le compte bancaire " + id + " n'existe pas");
-//        }
+        if(clientFacade.delete(id)){
+            handleMessage(true,"le client " + id + " est supprime");
+        }else{
+            handleMessage(true,"le client " + id + " n'existe pas");
+        }
     }
     
     private void handleMessage(boolean isSuccess, String leMessage){
