@@ -97,12 +97,14 @@
                                                          update=":formA:growl :formB:theTable"/>
                                         <p:commandButton action="#{compteBancaireMBean.showOperation(item.id)}" 
                                                          value="Détails operations"  />
+                                        <p:commandButton action="#{compteBancaireMBean.updateCompte(item.id)}" 
+                                                         value="Update"  />                                       
                             </p:column>
 
                         </p:dataTable>
                     </h:form>
                 </f:view>
-                <h:outputScript library="js" name="nouveauCompte.js"/>HELLO
+                <h:outputScript library="js" name="nouveauCompte.js"/>
             </ui:define>
         </ui:composition>        
     </h:body>

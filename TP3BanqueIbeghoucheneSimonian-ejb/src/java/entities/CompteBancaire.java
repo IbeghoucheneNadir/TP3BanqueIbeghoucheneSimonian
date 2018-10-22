@@ -50,7 +50,7 @@ public class CompteBancaire implements Serializable {
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OperationBancaire> listOperationBancaire;
 
-    public List<OperationBancaire> getListOperationBancaire() {
+    public List<OperationBancaire> getListOperationBancaire(int id) {
         return listOperationBancaire;
     }
 

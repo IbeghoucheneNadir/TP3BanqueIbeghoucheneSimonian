@@ -21,6 +21,8 @@ public class CompteBancaireMBean implements Serializable {
     private int id, id1, id2;
     private double montant;
     private String nom;
+    private CompteBancaire compteBancaire;
+
 
     public String getNom() {
         return nom;
@@ -91,6 +93,11 @@ public class CompteBancaireMBean implements Serializable {
         }
         return allCompteBancaire;
     }
+    
+        public CompteBancaire getCompteBancaire() {
+       
+        return compteBancaire;
+    }
 
     public void resetCache() {
         this.allCompteBancaire = new ArrayList<>();
@@ -160,6 +167,10 @@ public class CompteBancaireMBean implements Serializable {
     }
     public String showOperation(int id){
         return "OperationCompteList?id="+id+"&amp;faces-redirect=true";
+    }
+    
+     public String updateCompte(int id){
+        return "updateCompte?id="+id+"&amp;faces-redirect=true";
     }
 
 }
